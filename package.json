@@ -1,0 +1,88 @@
+{
+  "name": "timer",
+  "private": true,
+  "version": "1.0.0",
+  "main": "dist/electron/index.js",
+  "scripts": {
+    "dev": "chcp 65001 && cross-env NODE_ENV=development vite",
+    "build": "vue-tsc --noEmit && vite build && electron-builder",
+    "preview": "vite preview",
+    "build:icons": "electron-icon-builder --input=./src/assets/timer.png --output=./ --flatten"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.12.0",
+    "cross-env": "^7.0.3",
+    "mitt": "^3.0.0",
+    "pinia": "^2.0.23",
+    "sass": "^1.55.0",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@vicons/material": "^0.12.0",
+    "@vitejs/plugin-vue": "^3.0.0",
+    "electron": "^21.1.0",
+    "electron-builder": "^23.6.0",
+    "electron-icon-builder": "^2.0.1",
+    "naive-ui": "^2.33.5",
+    "typescript": "^4.6.4",
+    "unplugin-auto-import": "^0.11.2",
+    "unplugin-vue-components": "^0.22.8",
+    "vfonts": "^0.1.0",
+    "vite": "^3.0.0",
+    "vite-plugin-electron": "^0.9.3",
+    "vite-plugin-electron-renderer": "^0.9.3",
+    "vue-tsc": "^0.38.4"
+  },
+  "build": {
+    "appId": "醒醒计时器",
+    "productName": "醒醒计时器",
+    "asar": true,
+    "copyright": "Copyright © 2022 by Daybreak",
+    "directories": {
+      "output": "release/"
+    },
+    "files": [
+      "dist"
+    ],
+    "extraResources": [
+      {
+        "from": "./icons",
+        "to": "./icons"
+      }
+    ],
+    "mac": {
+      "icon": "./icons/icon.ico",
+      "artifactName": "${productName}_${version}.${ext}",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "icon": "./icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}_${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080"
+      }
+    ],
+    "releaseInfo": {
+      "releaseNotes": "版本更新的具体内容"
+    }
+  }
+}
